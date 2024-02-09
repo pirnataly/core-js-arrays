@@ -278,7 +278,6 @@ function createNDimensionalArray(n, size) {
     return result;
   }
   result = new Array(size).fill(createNDimensionalArray(n - 1, size));
-
   return result;
 }
 
@@ -348,8 +347,14 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const size = chunkSize;
+  const subarray = [];
+  arr.map((value, index, array) => {
+    subarray[index] = array.slice(index * size, index * size + size);
+    return subarray[index];
+  });
+  return subarray.slice(0, Math.ceil(arr.length / size));
 }
 
 /**
@@ -509,8 +514,9 @@ function getMaxItems(arr, n) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const commonElements = arr1.filter((x) => arr2.includes(x));
+  return commonElements;
 }
 
 /**
